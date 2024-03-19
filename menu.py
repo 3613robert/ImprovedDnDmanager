@@ -1,12 +1,13 @@
 from dice_roller import DiceRoller
 
 class Menu:
-    def __init__(self, character_instance, inventory_instance, weapons_instance, spells_instance, save_instance):
+    def __init__(self, character_instance, inventory_instance, weapons_instance, spells_instance, save_instance, battle_instance):
         self.character_instance = character_instance
         self.inventory_instance = inventory_instance
         self.weapons_instance = weapons_instance
         self.spells_instance = spells_instance
         self.save_instance = save_instance
+        self.battle_instance = battle_instance
 
     @staticmethod
     def intro():
@@ -17,10 +18,11 @@ class Menu:
         while menu:
             print("Type:\n"
                   "(s) for stats,\n"
-                  "(sp) for spells and casting spells,\n"
+                  "(sp) for spell list and slots\n"
                   "(i) for inventory,\n"
-                  "(w) for weapons and attacking,\n"
+                  "(w) for weapons,\n"
                   "(d) for diceroller,\n"
+                  "(b) for battle options\n"
                   "(sa) for save,\n"
                   "(l) for load\n")
             option = input("Where would you like to navigate?: \n")
@@ -44,14 +46,11 @@ class Menu:
                     option_spells = input("Type:\n"
                                           "(a) to add spell,\n"
                                           "(r) to remove,\n"
-                                          "(c) to cast,\n"
                                           "(b) for back\n")
                     if option_spells == 'a':
                         self.spells_instance.add_spell()
                     elif option_spells == 'r':
                         self.spells_instance.remove_spell()
-                    elif option_spells == 'c':
-                        self.spells_instance.cast_spell()
                     elif option_spells == 'b':
                         break
             elif option == 'i':
@@ -73,19 +72,18 @@ class Menu:
                     option_weapons = input("Type: \n"
                                            "(a) to add weapon,\n"
                                            "(r) to remove,\n"
-                                           "(at) to attack,\n"
                                            "(b) for back\n")
                     if option_weapons == 'a':
                         self.weapons_instance.add_weapon()
                     elif option_weapons == 'r':
                         self.weapons_instance.remove_weapon()
-                    elif option_weapons == 'at':
-                        self.weapons_instance.attack()
                     elif option_weapons == 'b':
                         break
             elif option == 'd':
                 dice_roller = DiceRoller()
                 dice_roller.roller()
+            elif option == 'b':
+                self.battle_instance.battle_menu()
             elif option == 'sa':
                 self.save_instance.save()
             elif option == 'l':

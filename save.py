@@ -21,6 +21,10 @@ class Save:
             'other_stats': self.character_instance.other_stats,
             'casting_mod': self.character_instance.casting_mod,
             'spell_save': self.character_instance.spell_save,
+            'hp': self.character_instance.hp,
+            'hit_die': self.character_instance.hit_die,
+            'hit_die_avg': self.character_instance.hit_die_avg,
+            'ac': self.character_instance.ac,
             'weapons': self.weapons_instance.weapons,
             'spell_list': self.spells_instance.spell_list,
         }
@@ -51,6 +55,10 @@ class Save:
                     self.character_instance.other_stats = data['other_stats']
                     self.character_instance.casting_mod = data['casting_mod']
                     self.character_instance.spell_save = data['spell_save']
+                    self.character_instance.hp = data['hp']
+                    self.character_instance.hit_die = data['hit_die']
+                    self.character_instance.hit_die_avg = data['hit_die_avg']
+                    self.character_instance.ac = data['ac']
                     self.weapons_instance.weapons = data['weapons']
                     self.spells_instance.spell_list = data['spell_list']
                 message = f"Character '{self.character_instance.name}' loaded successfully."

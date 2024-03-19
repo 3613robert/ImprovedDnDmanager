@@ -22,34 +22,9 @@ class Weapons:
             weapon_details = {"stat": stat, "modifier": modifier, "damage": damage}
             self.weapons[f"{name}"] = weapon_details
 
-    @staticmethod
-    def roll_dice(dice_notation):
-        rolls = []
-        for dice in re.findall(r'(\d+)d(\d+)', dice_notation):
-            num_dice = int(dice[0])
-            dice_type = int(dice[1])
-            for _ in range(num_dice):
-                rolls.append(random.randint(1, dice_type))
-        return rolls
-
     def display_weapons(self):
         for k, v in self.weapons.items():
             print(f"{k}:{v}")
-
-    def attack(self):
-        weapon = input('With which weapon?: \n').lower()
-        if weapon in self.weapons:
-            weapon_dice = self.weapons[weapon]['damage']
-            rolls = self.roll_dice(weapon_dice)
-            attack_roll = random.randint(1, 20) + self.weapons[weapon]['modifier']
-            total_damage = sum(rolls) + self.weapons[weapon]['stat']
-            message = f"Attack Roll:{attack_roll} and damage is: {total_damage} (rolls: {rolls})"
-            print(f'{"*" * len(message)}')
-            print(message)
-            print(f'{"*" * len(message)}')
-        else:
-            print(f"{weapon} not equipped as weapon")
-
 
     def remove_weapon(self):
         name = input("What weapon would you like to remove?: \n").lower()
