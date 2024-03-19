@@ -14,7 +14,7 @@ class Inventory:
                 print(f"{k}:{v}", end='|')
             print()
 
-    def remove_item(self) :
+    def remove_item(self):
         remove_item = input("Which item would you like to remove?: \n")
         remove_amount = int(input("How many would you like to remove?: \n"))
 

@@ -27,4 +27,3 @@ if option == 'l':
 elif option == 'n':
     character.new_character()
 menu.main_structure()
-
