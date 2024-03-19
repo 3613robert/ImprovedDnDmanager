@@ -11,7 +11,11 @@ inventory = Inventory()
 weapons = Weapons(character_instance=character)
 spells = Spells(character_instance=character)
 save = Save(character_instance=character, weapons_instance=weapons, spells_instance=spells)
-menu = Menu(character_instance=character, inventory_instance=inventory, weapons_instance=weapons, spells_instance=spells, save_instance=save)
+menu = Menu(character_instance=character,
+            inventory_instance=inventory,
+            weapons_instance=weapons,
+            spells_instance=spells,
+            save_instance=save)
 dice_roller = DiceRoller()
 
 menu.intro()

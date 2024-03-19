@@ -57,13 +57,31 @@ class Spells:
             print(f"The spell '{spell_to_cast_name}' is not in your spell list.")
             return
 
-        level_cast = input("Which level slot would you like to use to cast? "
-                           "Type 'Slot' followed by the level or 'Cantrip': \n").title()
+        level = input("Which level slot would you like to use to cast?"
+                      "Type 0 for a Cantrip: \n").title()
+        level_cast = f"Slot{level}"
         spell_description = spell_to_cast["description"]
-        rolls = self.roll_dice(spell_description)
+        if len(spell_description) < 10:
+            if level >= '1' or self.character_instance.level < 5:
+                rolls = self.roll_dice(spell_description)
+            elif 5 <= self.character_instance.level < 11:
+                rolls = (self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description))
+            elif 11 <= self.character_instance.level < 17:
+                rolls = (self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description))
+            else:
+                rolls = (self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description) +
+                         self.roll_dice(spell_description))
+        else:
+            rolls = self.roll_dice(spell_description)
+
         if rolls is not None:
             total_damage = sum(rolls)
-            if level_cast == "Cantrip":
+            if level == '0':
                 message = f'You cast {spell_to_cast_name}, dealing {total_damage} damage (rolls:{rolls})'
                 print(f'{"*" * len(message)}')
                 print(message)
@@ -82,7 +100,7 @@ class Spells:
                     print(message)
                     print(f'{"*" * len(message)}')
         else:
-            message = f'You cast {spell_to_cast_name}, {spell_description})'
+            message = f'You cast {spell_to_cast_name}, {spell_description}'
             print(f'{"*" * len(message)}')
             print(message)
             print(f'{"*" * len(message)}')

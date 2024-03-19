@@ -18,27 +18,37 @@ class Character:
     def new_character(self):
         self.name = input("What is your name?: \n")
         self._class = input("What class are you?: \n").lower()
-        strength = int(input("What is your strength?: \n"))
-        self.str = stats[strength]
-        dexterity = int(input("What is your dexterity?: \n"))
-        self.dex = stats[dexterity]
-        constitution = int(input("What is your constitution?: \n"))
-        self.con = stats[constitution]
-        wisdom = int(input("What is your wisdom?: \n"))
-        self.wis = stats[wisdom]
-        intelligence = int(input("What is your intelligence?: \n"))
-        self.int = stats[intelligence]
-        charisma = int(input("What is your charisma?: \n"))
-        self.cha = stats[charisma]
-        self.level = int(input("What is your character level?: \n"))
-        self.proficiency = proficiency[self.level]
-        if self._class == "wizard" or self._class == 'artificer':
+
+        def get_valid_input(prompt, stat):
+            while True:
+                try:
+                    value = int(input(prompt))
+                    return stats[value]
+                except ValueError:
+                    print(f'Please enter a valid number for {stat}')
+
+        self.str = get_valid_input("What is your strength?: \n", 'strength')
+        self.dex = get_valid_input("What is your dexterity?: \n", 'dexterity')
+        self.con = get_valid_input("What is your constitution?: \n", 'constitution')
+        self.wis = get_valid_input("What is your wisdom?: \n", 'wisdom')
+        self.int = get_valid_input("What is your intelligence?: \n", 'intelligence')
+        self.cha = get_valid_input("What is your charisma?: \n", 'charisma')
+
+        while True:
+            try:
+                self.level = int(input("What is your character level?: \n"))
+                self.proficiency = proficiency[self.level]
+                break
+            except ValueError:
+                print('Please enter a valid number for character level')
+
+        if self._class in {"wizard", 'artificer'}:
             self.casting_mod = self.int + self.proficiency
             self.spell_save = self.int + self.proficiency + 8
-        elif self._class == "sorcerer" or self._class == "warlock" or self._class == "paladin" or self._class == "bard":
+        elif self._class in {"sorcerer", "warlock", "paladin", "bard"}:
             self.casting_mod = self.cha + self.proficiency
             self.spell_save = self.cha + self.proficiency + 8
-        elif self._class == "cleric" or self._class == "druid" or self._class == "ranger":
+        elif self._class in {"cleric", "druid", "ranger"}:
             self.casting_mod = self.wis + self.proficiency
             self.spell_save = self.wis + self.proficiency + 8
 

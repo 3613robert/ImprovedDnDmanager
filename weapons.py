@@ -38,17 +38,18 @@ class Weapons:
 
     def attack(self):
         weapon = input('With which weapon?: \n').lower()
-        # damage = self.weapons[weapon]['damage']
-        weapon_dice = self.weapons[weapon]['damage']
-        # amount_dice = self.weapons[weapon]
-        rolls = self.roll_dice(weapon_dice)
-        attack_roll = random.randint(1, 20) + self.weapons[weapon]['modifier']
-        # damage_rolls = [random.randint(1, damage) for _ in range(amount_dice)]
-        total_damage = sum(rolls) + self.weapons[weapon]['stat']
-        message = f"Attack Roll:{attack_roll} and damage is: {total_damage} (rolls: {rolls})"
-        print(f'{"*" * len(message)}')
-        print(message)
-        print(f'{"*" * len(message)}')
+        if weapon in self.weapons:
+            weapon_dice = self.weapons[weapon]['damage']
+            rolls = self.roll_dice(weapon_dice)
+            attack_roll = random.randint(1, 20) + self.weapons[weapon]['modifier']
+            total_damage = sum(rolls) + self.weapons[weapon]['stat']
+            message = f"Attack Roll:{attack_roll} and damage is: {total_damage} (rolls: {rolls})"
+            print(f'{"*" * len(message)}')
+            print(message)
+            print(f'{"*" * len(message)}')
+        else:
+            print(f"{weapon} not equipped as weapon")
+
 
     def remove_weapon(self):
         name = input("What weapon would you like to remove?: \n").lower()
@@ -56,4 +57,4 @@ class Weapons:
             del self.weapons[name]
             print(f"Weapon '{name}' removed successfully.")
         else:
-            print(f"Weapon '{name}' not found.")
+            print(f"Weapon '{name}' not equipped.")
