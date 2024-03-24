@@ -62,6 +62,7 @@ class Battle:
             print(f"{weapon} not equipped as weapon")
 
     def cast_spell(self):
+        print(slots)
         self.spells_instance.display_spells()
         self.spells_instance.display_slots()
         spell_to_cast_name = input("Which spell would you like to cast?: \n").title()

@@ -1,4 +1,6 @@
 import json
+from spells import slots, slots_half_caster, slots_warlock
+import pandas as pd
 
 class Save:
     def __init__(self, character_instance, spells_instance, weapons_instance):
@@ -63,6 +65,7 @@ class Save:
                     self.character_instance.ac = data['ac']
                     self.weapons_instance.weapons = data['weapons']
                     self.spells_instance.spell_list = data['spell_list']
+
                 message = f"Character '{self.character_instance.name}' loaded successfully."
                 print(f'{"*" * len(message)}')
                 print(message)
