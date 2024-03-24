@@ -2,21 +2,10 @@ import pandas as pd
 import random
 import re
 
-slots = pd.read_csv('spells.csv')
-pd.DataFrame(slots)
-
-slots_half_caster = pd.read_csv('halfcaster.csv')
-pd.DataFrame(slots_half_caster)
-
-slots_warlock = pd.read_csv('warlock.csv')
-pd.DataFrame(slots_warlock)
-
 original_slots = pd.read_csv('original_spells.csv')
 pd.DataFrame(original_slots)
-
 original_half_caster = pd.read_csv('original_half_caster.csv')
 pd.DataFrame(original_half_caster)
-
 original_warlock = pd.read_csv('original_warlock.csv')
 pd.DataFrame(original_warlock)
 
@@ -24,6 +13,12 @@ class Spells:
     def __init__(self, character_instance):
         self.spell_list = []
         self.character_instance = character_instance
+        self.sfc = pd.read_csv('spells.csv')
+        self.slots = pd.DataFrame(self.sfc)
+        self.shc = pd.read_csv('halfcaster.csv')
+        self.slots_half_caster = pd.DataFrame(self.shc)
+        self.sw = pd.read_csv('warlock.csv')
+        self.slots_warlock = pd.DataFrame(self.sw)
 
     def add_spell(self):
         name = input("What is spell name?: \n").title()
@@ -47,26 +42,27 @@ class Spells:
 
     def display_slots(self):
         if self.character_instance._class in {'sorcerer', 'wizard', 'bard', 'cleric', 'druid'}:
-            current_slots = slots.loc[slots['Level'] == self.character_instance.level]
+            current_slots = self.slots.loc[self.slots['Level'] == self.character_instance.level]
             print(f"{'-'*30}")
             print(f"{current_slots}")
             print(f"{'-'*30}")
         elif self.character_instance._class in {'paladin', 'ranger', 'artificer'}:
             print(f"{'-'*30}")
-            current_slots = slots_half_caster.loc[slots['Level'] == self.character_instance.level]
+            current_slots = self.slots_half_caster.loc[self.slots['Level'] == self.character_instance.level]
             print(f"{current_slots}")
             print(f"{'-'*30}")
         elif self.character_instance._class == 'warlock':
             print(f"{'-'*30}")
-            current_slots = slots_warlock.loc[slots['Level'] == self.character_instance.level]
+            current_slots = self.slots_warlock.loc[self.slots['Level'] == self.character_instance.level]
             print(f"{current_slots}")
             print(f"{'-'*30}")
 
-    def restore_slots(self):
-        if self.character_instance._class in {'sorcerer', 'wizard', 'bard', 'cleric', 'druid'}:
-            slots.loc[slots['Level'] == self.character_instance.level] = original_slots.loc[original_slots['Level'] == self.character_instance.level]
-        elif self.character_instance._class in {'paladin', 'ranger', 'artificer'}:
-            slots_half_caster.loc[slots_half_caster['Level'] == self.character_instance.level] = original_half_caster.loc[original_half_caster['Level'] == self.character_instance.level]
-        elif self.character_instance._class == 'warlock':
-            slots_warlock.loc[slots_warlock['Level'] == self.character_instance.level] = original_warlock.loc[original_warlock['Level'] == self.character_instance.level]
+    def restore_slots(self) :
+        if self.character_instance._class in {'sorcerer', 'wizard', 'bard', 'cleric', 'druid'} :
+            self.slots.loc[self.slots['Level'] == self.character_instance.level] = original_slots.loc[original_slots['Level'] == self.character_instance.level].values
+        elif self.character_instance._class in {'paladin', 'ranger', 'artificer'} :
+            self.slots_half_caster.loc[self.slots_half_caster['Level'] == self.character_instance.level] = original_half_caster.loc[original_half_caster['Level'] == self.character_instance.level].values
+        elif self.character_instance._class == 'warlock' :
+            self.slots_warlock.loc[self.slots_warlock['Level'] == self.character_instance.level] = original_warlock.loc[original_warlock['Level'] == self.character_instance.level].values
+
 

@@ -1,6 +1,5 @@
 import random
 import re
-from spells import slots, slots_half_caster, slots_warlock
 
 class Battle:
     def __init__(self, character_instance, spells_instance, weapon_instance):
@@ -62,7 +61,6 @@ class Battle:
             print(f"{weapon} not equipped as weapon")
 
     def cast_spell(self):
-        print(slots)
         self.spells_instance.display_spells()
         self.spells_instance.display_slots()
         spell_to_cast_name = input("Which spell would you like to cast?: \n").title()
@@ -105,14 +103,14 @@ class Battle:
                     print(message)
                     print(f'{"*" * len(message)}')
                 else:
-                    available_slots = slots.loc[slots['Level'] == self.character_instance.level, level_cast]
+                    available_slots = self.spells_instance.slots.loc[self.spells_instance.slots['Level'] == self.character_instance.level, level_cast]
                     if available_slots.iloc[0] == 0:
                         message = f'No more spell slots for {level_cast}'
                         print(f'{"*" * len(message)}')
                         print(message)
                         print(f'{"*" * len(message)}')
                     else:
-                        slots.loc[slots['Level'] == self.character_instance.level, level_cast] -= 1
+                        self.spells_instance.slots.loc[self.spells_instance.slots['Level'] == self.character_instance.level, level_cast] -= 1
                         message = f'You cast {spell_to_cast_name}, dealing {total_damage} damage (roll(s):{rolls})'
                         print(f'{"*" * len(message)}')
                         print(message)
@@ -131,14 +129,14 @@ class Battle:
                     print(message)
                     print(f'{"*" * len(message)}')
                 else:
-                    available_slots = slots_half_caster.loc[slots['Level'] == self.character_instance.level, level_cast]
+                    available_slots = self.spells_instance.slots_half_caster.loc[self.spells_instance.slots_half_caster['Level'] == self.character_instance.level, level_cast]
                     if available_slots.iloc[0] == 0:
                         message = f'No more spell slots for {level_cast}'
                         print(f'{"*" * len(message)}')
                         print(message)
                         print(f'{"*" * len(message)}')
                     else:
-                        slots_half_caster.loc[slots['Level'] == self.character_instance.level, level_cast] -= 1
+                        self.spells_instance.slots_half_caster.loc[self.spells_instance.slots_half_caster['Level'] == self.character_instance.level, level_cast] -= 1
                         message = f'You cast {spell_to_cast_name}, dealing {total_damage} damage (roll(s):{rolls})'
                         print(f'{"*" * len(message)}')
                         print(message)
@@ -158,14 +156,14 @@ class Battle:
                     print(message)
                     print(f'{"*" * len(message)}')
                 else:
-                    available_slots = slots_warlock.loc[slots['Level'] == self.character_instance.level, level_cast]
+                    available_slots = self.spells_instance.slots_warlock.loc[self.spells_instance.slots_warlock['Level'] == self.character_instance.level, level_cast]
                     if available_slots.iloc[0] == 0:
                         message = f'No more spell slots for {level_cast}'
                         print(f'{"*" * len(message)}')
                         print(message)
                         print(f'{"*" * len(message)}')
                     else:
-                        slots_warlock.loc[slots['Level'] == self.character_instance.level, level_cast] -= 1
+                        self.spells_instance.slots_warlock.loc[self.spells_instance.slots_warlock['Level'] == self.character_instance.level, level_cast] -= 1
                         message = f'You cast {spell_to_cast_name}, dealing {total_damage} damage (roll(s):{rolls})'
                         print(f'{"*" * len(message)}')
                         print(message)

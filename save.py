@@ -1,5 +1,4 @@
 import json
-from spells import slots, slots_half_caster, slots_warlock
 import pandas as pd
 
 class Save:
@@ -30,6 +29,9 @@ class Save:
             'ac': self.character_instance.ac,
             'weapons': self.weapons_instance.weapons,
             'spell_list': self.spells_instance.spell_list,
+            'slots_full_caster': self.spells_instance.slots.to_dict(),
+            'slots_half_caster': self.spells_instance.slots_half_caster.to_dict(),
+            'slots_warlock': self.spells_instance.slots_warlock.to_dict()
         }
         with open(f'{self.character_instance.name}.json', 'w') as f:
             json.dump(data, f)
@@ -65,6 +67,9 @@ class Save:
                     self.character_instance.ac = data['ac']
                     self.weapons_instance.weapons = data['weapons']
                     self.spells_instance.spell_list = data['spell_list']
+                    self.spells_instance.slots = pd.DataFrame(data['slots_full_caster'])
+                    self.spells_instance.slots_half_caster = pd.DataFrame(data['slots_half_caster'])
+                    self.spells_instance.slots_warlock = pd.DataFrame(data['slots_warlock'])
 
                 message = f"Character '{self.character_instance.name}' loaded successfully."
                 print(f'{"*" * len(message)}')

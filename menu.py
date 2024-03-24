@@ -1,5 +1,4 @@
 from dice_roller import DiceRoller
-from spells import slots
 
 class Menu:
     def __init__(self, character_instance, inventory_instance, weapons_instance, spells_instance, save_instance, battle_instance):
