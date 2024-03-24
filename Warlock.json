@@ -1,1 +1,0 @@
-{"name": "Warlock", "_class": "warlock", "str": -1, "dex": 3, "con": 1, "wis": 1, "int": 0, "cha": 4, "level": 11, "proficiency": 4, "other_stats": [], "casting_mod": 8, "spell_save": 16, "hp": 59, "hit_die": 8, "hit_die_avg": 5, "ac": 16, "weapons": {}, "spell_list": [{"name": "Eldritch Blast", "description": "1d10"}]}

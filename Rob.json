@@ -1,1 +1,0 @@
-{"name": "Rob", "_class": "paladin", "str": 4, "dex": 4, "con": 4, "wis": 4, "int": 4, "cha": 4, "level": 9, "proficiency": 4, "other_stats": [], "casting_mod": 8, "spell_save": 16, "max_hp":14, "current_hp": 62, "hit_die": 10, "hit_die_avg": 6, "ac": 18, "weapons": {}, "spell_list": [{"name": "Guiding Bolt", "description": "3d6"}]}
