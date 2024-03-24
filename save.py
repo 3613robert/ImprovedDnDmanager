@@ -21,7 +21,8 @@ class Save:
             'other_stats': self.character_instance.other_stats,
             'casting_mod': self.character_instance.casting_mod,
             'spell_save': self.character_instance.spell_save,
-            'hp': self.character_instance.hp,
+            'current_hp': self.character_instance.current_hp,
+            'max_hp': self.character_instance.max_hp,
             'hit_die': self.character_instance.hit_die,
             'hit_die_avg': self.character_instance.hit_die_avg,
             'ac': self.character_instance.ac,
@@ -55,7 +56,8 @@ class Save:
                     self.character_instance.other_stats = data['other_stats']
                     self.character_instance.casting_mod = data['casting_mod']
                     self.character_instance.spell_save = data['spell_save']
-                    self.character_instance.hp = data['hp']
+                    self.character_instance.current_hp = data['current_hp']
+                    self.character_instance.max_hp = data['max_hp']
                     self.character_instance.hit_die = data['hit_die']
                     self.character_instance.hit_die_avg = data['hit_die_avg']
                     self.character_instance.ac = data['ac']

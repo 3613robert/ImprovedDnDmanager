@@ -38,8 +38,8 @@ class Spells:
 
     def display_slots(self):
         if self.character_instance._class in {'sorcerer', 'wizard', 'bard', 'cleric', 'druid'}:
-            print(f"{'-'*30}")
             current_slots = slots.loc[slots['Level'] == self.character_instance.level]
+            print(f"{'-'*30}")
             print(f"{current_slots}")
             print(f"{'-'*30}")
         elif self.character_instance._class in {'paladin', 'ranger', 'artificer'}:
@@ -52,3 +52,7 @@ class Spells:
             current_slots = slots_warlock.loc[slots['Level'] == self.character_instance.level]
             print(f"{current_slots}")
             print(f"{'-'*30}")
+
+    def restore_slots(self):
+        pass
+

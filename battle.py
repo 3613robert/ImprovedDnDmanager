@@ -11,7 +11,7 @@ class Battle:
 
     def battle_menu(self):
         while True:
-            message = f"Current hp: {self.character_instance.hp} and AC: {self.character_instance.ac}"
+            message = f"Current hp: {self.character_instance.max_hp} and AC: {self.character_instance.ac}"
             print(f'{"*" * len(message)}')
             print(message)
             print(f'{"*" * len(message)}')
@@ -35,8 +35,8 @@ class Battle:
         if to_hit >= self.character_instance.ac:
             print("You've been hit")
             damage_taken = int(input("What is the damage?"))
-            self.character_instance.hp -= damage_taken
-            print(f"You're hp is currently {self.character_instance.hp}")
+            self.character_instance.max_hp -= damage_taken
+            print(f"You're hp is currently {self.character_instance.max_hp}")
 
     @staticmethod
     def roll_dice(dice_notation):

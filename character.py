@@ -14,7 +14,8 @@ class Character:
         self.other_stats = []
         self.casting_mod = 0
         self.spell_save = 0
-        self.hp = 0
+        self.current_hp = 0
+        self.max_hp = 0
         self.hit_die = 0
         self.hit_die_avg = 0
         self.ac = 0
@@ -68,12 +69,12 @@ class Character:
         elif self._class == 'barbarian':
             self.hit_die = 12
             self.hit_die_avg = 7
-        self.hp = (self.con + self.hit_die) + (self.level * self.hit_die_avg - self.hit_die_avg)
+        self.max_hp = (self.con + self.hit_die) + (self.level * self.hit_die_avg - self.hit_die_avg)
 
     def display_stats(self):
         other_stats_str = '\n'.join([f"{k}:{v}" for stat_dict in self.other_stats for k, v in stat_dict.items()])
         print(f"Name: {self.name} | Level: {self.level} | Class: {self._class}\n"
-              f"HP: {self.hp} | AC:{self.ac}\n"
+              f"HP: {self.current_hp}/{self.max_hp} | AC:{self.ac}\n"
               f"Proficiency bonus: {self.proficiency}\n"
               f"Strength: {self.str}\n"
               f"Dexterity: {self.dex}\n"

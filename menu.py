@@ -1,4 +1,5 @@
 from dice_roller import DiceRoller
+from spells import slots
 
 class Menu:
     def __init__(self, character_instance, inventory_instance, weapons_instance, spells_instance, save_instance, battle_instance):
@@ -22,7 +23,8 @@ class Menu:
                   "(i) for inventory,\n"
                   "(w) for weapons,\n"
                   "(d) for diceroller,\n"
-                  "(b) for battle options\n"
+                  "(b) for battle options,\n"
+                  "(r) for a long rest,\n"
                   "(sa) for save,\n"
                   "(l) for load\n")
             option = input("Where would you like to navigate?: \n")
@@ -84,6 +86,9 @@ class Menu:
                 dice_roller.roller()
             elif option == 'b':
                 self.battle_instance.battle_menu()
+            elif option == 'r':
+                self.character_instance.current_hp = self.character_instance.max_hp
+                self.spells_instance.restore_slots()
             elif option == 'sa':
                 self.save_instance.save()
             elif option == 'l':
