@@ -11,6 +11,9 @@ pd.DataFrame(slots_half_caster)
 slots_warlock = pd.read_csv('warlock.csv')
 pd.DataFrame(slots_warlock)
 
+original_slots = pd.read_csv('original_spells.csv')
+pd.DataFrame(original_slots)
+
 class Spells:
     def __init__(self, character_instance):
         self.spell_list = []
@@ -54,5 +57,4 @@ class Spells:
             print(f"{'-'*30}")
 
     def restore_slots(self):
-        pass
-
+        slots_half_caster.loc[slots['Level'] == self.character_instance.level] = original_slots.loc[slots['Level'] == self.character_instance.level]
