@@ -31,7 +31,9 @@ class Save:
             'spell_list': self.spells_instance.spell_list,
             'slots_full_caster': self.spells_instance.slots.to_dict(),
             'slots_half_caster': self.spells_instance.slots_half_caster.to_dict(),
-            'slots_warlock': self.spells_instance.slots_warlock.to_dict()
+            'slots_warlock': self.spells_instance.slots_warlock.to_dict(),
+            'hit_die_max': self.character_instance.hit_die_max,
+            'hit_die_left': self.character_instance.hit_die_left,
         }
         with open(f'{self.character_instance.name}.json', 'w') as f:
             json.dump(data, f)
@@ -70,6 +72,8 @@ class Save:
                     self.spells_instance.slots = pd.DataFrame(data['slots_full_caster'])
                     self.spells_instance.slots_half_caster = pd.DataFrame(data['slots_half_caster'])
                     self.spells_instance.slots_warlock = pd.DataFrame(data['slots_warlock'])
+                    self.character_instance.hit_die_max = data['hit_die_max'],
+                    self.character_instance.hit_die_left = data['hit_die_left']
 
                 message = f"Character '{self.character_instance.name}' loaded successfully."
                 print(f'{"*" * len(message)}')

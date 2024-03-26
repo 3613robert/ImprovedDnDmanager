@@ -1,13 +1,20 @@
 from dice_roller import DiceRoller
 
 class Menu:
-    def __init__(self, character_instance, inventory_instance, weapons_instance, spells_instance, save_instance, battle_instance):
+    def __init__(self, character_instance,
+                 inventory_instance,
+                 weapons_instance,
+                 spells_instance,
+                 save_instance,
+                 battle_instance,
+                 short_rest_instance):
         self.character_instance = character_instance
         self.inventory_instance = inventory_instance
         self.weapons_instance = weapons_instance
         self.spells_instance = spells_instance
         self.save_instance = save_instance
         self.battle_instance = battle_instance
+        self.short_rest_instance = short_rest_instance
 
     @staticmethod
     def intro():
@@ -23,7 +30,8 @@ class Menu:
                   "(w) for weapons,\n"
                   "(d) for diceroller,\n"
                   "(b) for battle options,\n"
-                  "(r) for a long rest,\n"
+                  "(sr) for short rest, \n"
+                  "(lr) for a long rest,\n"
                   "(sa) for save,\n"
                   "(l) for load\n")
             option = input("Where would you like to navigate?: \n")
@@ -85,7 +93,10 @@ class Menu:
                 dice_roller.roller()
             elif option == 'b':
                 self.battle_instance.battle_menu()
-            elif option == 'r':
+            elif option == 'sr':
+                self.short_rest_instance.use_hit_die()
+                self.short_rest_instance.restore_slots_short_rest()
+            elif option == 'lr':
                 self.character_instance.current_hp = self.character_instance.max_hp
                 self.spells_instance.restore_slots()
             elif option == 'sa':

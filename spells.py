@@ -57,7 +57,7 @@ class Spells:
             print(f"{current_slots}")
             print(f"{'-'*30}")
 
-    def restore_slots(self) :
+    def restore_slots(self):
         if self.character_instance._class in {'sorcerer', 'wizard', 'bard', 'cleric', 'druid'} :
             self.slots.loc[self.slots['Level'] == self.character_instance.level] = original_slots.loc[original_slots['Level'] == self.character_instance.level].values
         elif self.character_instance._class in {'paladin', 'ranger', 'artificer'} :
